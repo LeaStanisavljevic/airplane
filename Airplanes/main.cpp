@@ -1,8 +1,11 @@
 /// <summary>
-/// simple game loop for SFML[2.5.1]
-/// 
-/// @author Peter Lowe
-/// @date May 2019
+/// Lea Stanisavljevic ///
+/// C00269519 ///
+/// 24/01/2022 ///
+/// ---------------------------------------------------------------------------------------------------
+/// A game with 2 airplanes which use vectors as velocities and produce an explosion at collision ///
+/// ---------------------------------------------------------------------------------------------------
+/// Bugs: no known bugs ///
 /// </summary>
 
 #ifdef _DEBUG 

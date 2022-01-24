@@ -1,8 +1,11 @@
 /// <summary>
-/// @author Peter Lowe
-/// @date May 2019
-///
-/// you need to change the above lines or lose marks
+/// Lea Stanisavljevic ///
+/// C00269519 ///
+/// 24/01/2022 ///
+/// ---------------------------------------------------------------------------------------------------
+/// A game with 2 airplanes which use vectors as velocities and produce an explosion at collision ///
+/// ---------------------------------------------------------------------------------------------------
+/// Bugs: no known bugs ///
 /// </summary>
 
 #include "Game.h"
@@ -17,7 +20,7 @@
 /// load and setup thne image
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
+	m_window{ sf::VideoMode{ WIDTH, HEIGHT, 32U }, "SFML Game" },
 	m_exitGame{false} //when true game will exit
 {
 	setupFontAndText(); // load font 
@@ -69,13 +72,21 @@ void Game::processEvents()
 	sf::Event newEvent;
 	while (m_window.pollEvent(newEvent))
 	{
-		if ( sf::Event::Closed == newEvent.type) // window message
+		if (sf::Event::Closed == newEvent.type) // window message
 		{
 			m_exitGame = true;
 		}
 		if (sf::Event::KeyPressed == newEvent.type) //user pressed a key
 		{
 			processKeys(newEvent);
+		}
+		if (sf::Event::MouseButtonPress == newEvent.type)
+		{
+			processMousePressed(newEvent);
+		}
+		if (sf::Event::MouseButtonRelease == newEvent.type)
+		{
+			processMouseReleased(newEvent);
 		}
 	}
 }
