@@ -48,7 +48,15 @@ private:
 	sf::Text m_welcomeMessage; // text used for message on screen
 	sf::Texture m_logoTexture; // texture used for sfml logo
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
+
+	bool m_displayMessage{ true }; // do we display the help message on screen
+
+
+	sf::Vector2f m_firstClick{ 0.0f,0.0f }; // location of mouse down event
+	sf::Vector2f m_secondClick{ 0.0f,0.0f }; // locatiion of mouse up event
+
 	bool m_exitGame; // control exiting game
+	bool m_debugGraphics{ true };  // control when degub graphics are on
 
 };
 

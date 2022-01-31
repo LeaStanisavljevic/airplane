@@ -78,11 +78,11 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
-		if (sf::Event::MouseButtonPress == newEvent.type)
+		if (sf::Event::MouseButtonPressed == newEvent.type)
 		{
 			processMousePressed(newEvent);
 		}
-		if (sf::Event::MouseButtonRelease == newEvent.type)
+		if (sf::Event::MouseButtonReleased == newEvent.type)
 		{
 			processMouseReleased(newEvent);
 		}
@@ -109,17 +109,17 @@ void Game::processKeys(sf::Event t_event)
 void Game::processMousePressed(sf::Event t_event)
 {
 	m_firstClick.x = t_event.mouseButton.x;
-	m.firstCLick.y = t_event.mouseButton.y;
+	m_firstClick.y = t_event.mouseButton.y;
 }
 
 void Game::processMouseReleased(sf::Event t_event)
 {
 	m_secondClick.x = t_event.mouseButton.x;
 	m_secondClick.y = t_event.mouseButton.y;
-	sf::Vector2f velocity = m.secondClick - m.firstClick;
-	float radians = std::atan(velocity.y, velocity.x);
+	sf::Vector2f velocity = m_secondClick - m_firstClick;
+	float radians = std::atan2(velocity.y, velocity.x);
 	float degrees = 180.0f * radians / static_cast<float>(M_PI);
-	degree += 90.0f;
+	degrees += 90.0f;
 }
 
 /// <summary>
