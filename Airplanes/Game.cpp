@@ -19,10 +19,13 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ WIDTH, HEIGHT, 32U }, "SFML Game" },
-	m_exitGame{false} //when true the game will exit
+	m_exitGame{false} 
+	// exits the game //
 {
-	setupFontAndText(); // load the font 
-	setupSprite(); // load the texture
+	// load the font //
+	setupFontAndText();
+	// load the texture //
+	setupSprite();
 }
 
 Game::~Game()

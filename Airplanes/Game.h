@@ -15,6 +15,9 @@
 #include <math.h>
 #include <iostream>
 
+/// <summary>
+/// graphics window parameter declaration (size)
+/// </summary>
 const int HEIGHT = 800;
 const int WIDTH = 1000;
 
@@ -24,7 +27,7 @@ public:
 	Game();
 	~Game();
 	/// <summary>
-	/// main method for game
+	/// main method for the game
 	/// </summary>
 	void run();
 
@@ -32,6 +35,8 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
+	void processMousePress(sf::Event t_event);
+	void processMouseRelease(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	
