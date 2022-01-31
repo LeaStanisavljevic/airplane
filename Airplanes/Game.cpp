@@ -117,9 +117,23 @@ void Game::processMouseReleased(sf::Event t_event)
 	m_secondClick.x = t_event.mouseButton.x;
 	m_secondClick.y = t_event.mouseButton.y;
 	sf::Vector2f velocity = m_secondClick - m_firstClick;
-	float radians = std::atan2(velocity.y, velocity.x);
-	float degrees = 180.0f * radians / static_cast<float>(M_PI);
-	degrees += 90.0f;
+	float movingRadians = std::atan2(velocity.y, velocity.x);
+	float movingDegrees = 180.0f * movingRadians / static_cast<float>(M_PI);
+	movingDegrees += 90.0f;
+
+	std::cout << movingRadians << std::endl;
+	if (sf::Mouse::Right == t_event.mouseButton.button)
+	{
+		m_smallPlaneVelocity = velocity / 50.0f;
+		m_smallPlaneMoving = movingDegrees;
+		m_smallPlaneSprite.setRotation(movingDegrees);
+	}
+	if (sf::Mouse::Left == t_event.mouseButton.button)
+	{
+		m_bigPlaneVelocity = velocity / 100.0f;
+		m_bigPlaneMoving = movingDegrees;
+		m_bigPlaneSprite.setRotation(movingDegrees);
+	}
 }
 
 /// <summary>
@@ -132,6 +146,7 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+
 }
 
 /// <summary>

@@ -48,6 +48,15 @@ private:
 	sf::Text m_welcomeMessage; // text used for message on screen
 	sf::Texture m_logoTexture; // texture used for sfml logo
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
+	sf::Sprite m_bigPlaneSprite; // sprite used for big plane
+	sf::Sprite m_smallPlaneSprite; // sprite used for small plane
+
+	sf::Vector2f m_bigPlaneLocation;  // location of big plane geometric centre
+	sf::Vector2f m_smallPlaneLocation; // location of small plane
+	sf::Vector2f m_bigPlaneVelocity{ 1.0f,-1.0f }; // initial velocity of big plane
+	sf::Vector2f m_smallPlaneVelocity{ -2.0f, 2.0f }; // initial velocity of small plane
+	float m_bigPlaneMoving = 45.0f; // in degrees
+	float m_smallPlaneMoving = 225.0f; // heading of small plane
 
 	bool m_displayMessage{ true }; // do we display the help message on screen
 
