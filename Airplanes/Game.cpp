@@ -86,7 +86,6 @@ void Game::processEvents()
 	}
 }
 
-
 /// <summary>
 /// deals with the key presses from the user
 /// </summary>
@@ -102,6 +101,22 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_debugGraphics = !m_debugGraphics;
 	}
+}
+
+void Game::processMousePress(sf::Event t_event)
+{
+	m_firstClick.x = t_event.mouseButton.x;
+	m.firstCLick.y = t_event.mouseButton.y;
+}
+
+void Game::processMouseRelease(sf::Event t_event)
+{
+	m_secondClick.x = t_event.mouseButton.x;
+	m_secondClick.y = t_event.mouseButton.y;
+	sf::Vector2f velocity = m.secondClick - m.firstClick;
+	float radians = std::atan(velocity.y, velocity.x);
+	float degrees = 180.0f * radians / static_cast<float>(M_PI);
+	degree += 90.0f;
 }
 
 /// <summary>

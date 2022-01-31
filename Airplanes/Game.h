@@ -1,15 +1,22 @@
 /// <summary>
-/// author Pete Lowe May 2019
-/// you need to change the above line or lose marks
+/// Lea Stanisavljevic ///
+/// C00269519 ///
+/// 24/01/2022 ///
+/// ---------------------------------------------------------------------------------------------------
+/// A game with 2 airplanes which use vectors as velocities and produce an explosion at collision ///
+/// ---------------------------------------------------------------------------------------------------
+/// Bugs: no known bugs ///
 /// </summary>
 #ifndef GAME_HPP
 #define GAME_HPP
-/// <summary>
-/// include guards used so we don't process this file twice
-/// same as #pragma once
-/// Don't forget the endif at the bottom
-/// </summary>
+
 #include <SFML/Graphics.hpp>
+#define USE_MATH_DEFINES
+#include <math.h>
+#include <iostream>
+
+const int HEIGHT = 800;
+const int WIDTH = 1000;
 
 class Game
 {
