@@ -35,8 +35,8 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
-	void processMousePress(sf::Event t_event);
-	void processMouseRelease(sf::Event t_event);
+	void processMousePressed(sf::Event t_event);
+	void processMouseReleased(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	

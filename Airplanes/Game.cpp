@@ -106,13 +106,13 @@ void Game::processKeys(sf::Event t_event)
 	}
 }
 
-void Game::processMousePress(sf::Event t_event)
+void Game::processMousePressed(sf::Event t_event)
 {
 	m_firstClick.x = t_event.mouseButton.x;
 	m.firstCLick.y = t_event.mouseButton.y;
 }
 
-void Game::processMouseRelease(sf::Event t_event)
+void Game::processMouseReleased(sf::Event t_event)
 {
 	m_secondClick.x = t_event.mouseButton.x;
 	m_secondClick.y = t_event.mouseButton.y;
