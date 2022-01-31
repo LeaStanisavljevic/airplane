@@ -14,34 +14,26 @@
 
 
 /// <summary>
-/// default constructor
-/// setup the window properties
-/// load and setup the text 
-/// load and setup thne image
+/// setup the window size
+/// load and setup the text and image
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ WIDTH, HEIGHT, 32U }, "SFML Game" },
-	m_exitGame{false} //when true game will exit
+	m_exitGame{false} //when true the game will exit
 {
-	setupFontAndText(); // load font 
-	setupSprite(); // load texture
+	setupFontAndText(); // load the font 
+	setupSprite(); // load the texture
 }
 
-/// <summary>
-/// default destructor we didn't dynamically allocate anything
-/// so we don't need to free it, but mthod needs to be here
-/// </summary>
 Game::~Game()
 {
 }
 
 
 /// <summary>
-/// main game loop
-/// update 60 times per second,
-/// process update as often as possible and at least 60 times per second
-/// draw as often as possible but only updates are on time
-/// if updates run slow then don't render frames
+/// the main game loop
+/// processes updates as often as possible and at least 60 times per second
+/// draw as often as possible but only if updates are on time if slow dont render frames
 /// </summary>
 void Game::run()
 {	
@@ -57,15 +49,18 @@ void Game::run()
 		{
 			timeSinceLastUpdate -= timePerFrame;
 			processEvents(); // at least 60 fps
-			update(timePerFrame); //60 fps
+#ifdef _DEBUG 
+			render();
+#endif
+
+			update(timePerFrame); // at 60 fps
 		}
-		render(); // as many as possible
+		render();
 	}
 }
 /// <summary>
-/// handle user and system events/ input
-/// get key presses/ mouse moves etc. from OS
-/// and user :: Don't do game update here
+/// user & system events or input
+/// mouse presses or key presses are processed here
 /// </summary>
 void Game::processEvents()
 {
@@ -93,14 +88,19 @@ void Game::processEvents()
 
 
 /// <summary>
-/// deal with key presses from the user
+/// deals with the key presses from the user
 /// </summary>
 /// <param name="t_event">key press event</param>
 void Game::processKeys(sf::Event t_event)
 {
+	m_displayMessage = false;
 	if (sf::Keyboard::Escape == t_event.key.code)
 	{
 		m_exitGame = true;
+	}
+	if (sf::Keyboard::F1 == t_event.key.code)
+	{
+		m_debugGraphics = !m_debugGraphics;
 	}
 }
 
