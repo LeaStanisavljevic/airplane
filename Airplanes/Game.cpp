@@ -1,32 +1,27 @@
 /// <summary>
 /// Lea Stanisavljevic ///
 /// C00269519 ///
-/// 24/01/2022 ///
+/// 5/03/2022 ///
 /// ---------------------------------------------------------------------------------------------------
-/// A game with 2 airplanes which use vectors as velocities and produce an explosion at collision ///
+/// A game with a player which moves within a boudary ///
 /// ---------------------------------------------------------------------------------------------------
 /// Bugs: no known bugs ///
 /// </summary>
 
 #include "Game.h"
 #include <iostream>
-
-
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 /// <summary>
 /// setup the window size
 /// load and setup the text and image
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ WIDTH, HEIGHT, 32U }, "SFML Game" },
+	m_window{ sf::VideoMode{ 800, 600, 32U }, "SFML Game" },
 	m_exitGame{false} 
 	// exits the game //
-{
-	// load the font //
-	setupFontAndText();
-	// load the texture //
-	setupSprite();
-}
+{}
 
 Game::~Game()
 {
@@ -43,20 +38,20 @@ void Game::run()
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	const float fps{ 60.0f };
-	sf::Time timePerFrame = sf::seconds(1.0f / fps); // 60 fps
+	sf::Time timePerFrame = sf::seconds(1.0f / fps); // 60 fps //
 	while (m_window.isOpen())
 	{
-		processEvents(); // as many as possible
+		processEvents(); // as many as possible //
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > timePerFrame)
 		{
 			timeSinceLastUpdate -= timePerFrame;
-			processEvents(); // at least 60 fps
+			processEvents(); // at least 60 fps //
 #ifdef _DEBUG 
 			render();
 #endif
 
-			update(timePerFrame); // at 60 fps
+			update(timePerFrame); // at 60 fps //
 		}
 		render();
 	}
@@ -78,14 +73,6 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
-		if (sf::Event::MouseButtonPressed == newEvent.type)
-		{
-			processMousePressed(newEvent);
-		}
-		if (sf::Event::MouseButtonReleased == newEvent.type)
-		{
-			processMouseReleased(newEvent);
-		}
 	}
 }
 
@@ -95,7 +82,6 @@ void Game::processEvents()
 /// <param name="t_event">key press event</param>
 void Game::processKeys(sf::Event t_event)
 {
-	m_displayMessage = false;
 	if (sf::Keyboard::Escape == t_event.key.code)
 	{
 		m_exitGame = true;
@@ -104,35 +90,21 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_debugGraphics = !m_debugGraphics;
 	}
-}
-
-void Game::processMousePressed(sf::Event t_event)
-{
-	m_firstClick.x = t_event.mouseButton.x;
-	m_firstClick.y = t_event.mouseButton.y;
-}
-
-void Game::processMouseReleased(sf::Event t_event)
-{
-	m_secondClick.x = t_event.mouseButton.x;
-	m_secondClick.y = t_event.mouseButton.y;
-	sf::Vector2f velocity = m_secondClick - m_firstClick;
-	float movingRadians = std::atan2(velocity.y, velocity.x);
-	float movingDegrees = 180.0f * movingRadians / static_cast<float>(M_PI);
-	movingDegrees += 90.0f;
-
-	std::cout << movingRadians << std::endl;
-	if (sf::Mouse::Right == t_event.mouseButton.button)
+	if (sf::Keyboard::Up == t_event.key.code)
 	{
-		m_smallPlaneVelocity = velocity / 50.0f;
-		m_smallPlaneMoving = movingDegrees;
-		m_smallPlaneSprite.setRotation(movingDegrees);
+		player.moveUp();
 	}
-	if (sf::Mouse::Left == t_event.mouseButton.button)
+	if (sf::Keyboard::Down == t_event.key.code)
 	{
-		m_bigPlaneVelocity = velocity / 100.0f;
-		m_bigPlaneMoving = movingDegrees;
-		m_bigPlaneSprite.setRotation(movingDegrees);
+		player.moveDown();
+	}
+	if (sf::Keyboard::Left == t_event.key.code)
+	{
+		player.moveLeft();
+	}
+	if (sf::Keyboard::Right == t_event.key.code)
+	{
+		player.moveRight();
 	}
 }
 
@@ -155,41 +127,6 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	m_window.draw(m_welcomeMessage);
-	m_window.draw(m_logoSprite);
+	m_window.draw(player.returnSprite());
 	m_window.display();
-}
-
-/// <summary>
-/// load the font and setup the text message for screen
-/// </summary>
-void Game::setupFontAndText()
-{
-	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\ariblk.ttf"))
-	{
-		std::cout << "problem loading arial black font" << std::endl;
-	}
-	m_welcomeMessage.setFont(m_ArialBlackfont);
-	m_welcomeMessage.setString("SFML Game");
-	m_welcomeMessage.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
-	m_welcomeMessage.setPosition(40.0f, 40.0f);
-	m_welcomeMessage.setCharacterSize(80U);
-	m_welcomeMessage.setOutlineColor(sf::Color::Red);
-	m_welcomeMessage.setFillColor(sf::Color::Black);
-	m_welcomeMessage.setOutlineThickness(3.0f);
-
-}
-
-/// <summary>
-/// load the texture and setup the sprite for the logo
-/// </summary>
-void Game::setupSprite()
-{
-	if (!m_logoTexture.loadFromFile("ASSETS\\IMAGES\\SFML-LOGO.png"))
-	{
-		// simple error message if previous call fails
-		std::cout << "problem loading logo" << std::endl;
-	}
-	m_logoSprite.setTexture(m_logoTexture);
-	m_logoSprite.setPosition(300.0f, 180.0f);
 }

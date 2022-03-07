@@ -1,9 +1,9 @@
 /// <summary>
 /// Lea Stanisavljevic ///
 /// C00269519 ///
-/// 24/01/2022 ///
+/// 5/03/2022 ///
 /// ---------------------------------------------------------------------------------------------------
-/// A game with 2 airplanes which use vectors as velocities and produce an explosion at collision ///
+/// A game with a player which moves within a boudary ///
 /// ---------------------------------------------------------------------------------------------------
 /// Bugs: no known bugs ///
 /// </summary>
